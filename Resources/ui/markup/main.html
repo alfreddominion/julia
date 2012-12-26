@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Quick Start Guide Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="../../lib/leaflet/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="app://Resources/lib/leaflet/leaflet.ie.css" /><![endif]-->
+</head>
+<body>
+	<center><div id="map" style="width: 400px; height: 500px"></div></center>
+
+	<script src="../../lib/leaflet/leaflet.js"></script>
+	<script>
+		
+		var map = L.map('map').setView([37.040233612060547,-76.476127624511719], 16);
+
+		L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+		}).addTo(map);
+
+
+		L.marker([37.040233612060547,-76.476127624511719]).addTo(map)
+			.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+		L.circle([34.832851409912109,-92.195610046386719], 500, {
+			color: 'red',
+			fillColor: '#f03',
+			fillOpacity: 0.5
+		}).addTo(map).bindPopup("I am a circle.");
+
+		L.polygon([
+			[37.039944, -76.476042],
+			[37.040051, -76.475857],
+			[37.040056, -76.475848],
+			[37.040063, -76.475841],
+			[37.04007, -76.475836],
+			[37.040079, -76.475832],
+			[37.040087, -76.475831],
+			[37.040096, -76.475831],
+			[37.040105, -76.475834],
+			[37.040112, -76.475838],
+			[37.040119, -76.475845],
+			[37.040136, -76.475858],
+			[37.040521, -76.476215],
+			[37.040391, -76.476441],
+			[37.0399, -76.476042]
+		]).addTo(map).bindPopup("I am Alfreds house.");
+
+
+		var popup = L.popup();
+
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("You clicked the map at " + e.latlng.toString())
+				.openOn(map);
+		}
+
+		map.on('click', onMapClick);
+
+	</script>
+</body>
+</html>
